@@ -98,6 +98,15 @@ resource "aws_security_group_rule" "ingress_ssh_tcp" {
   cidr_blocks       = var.ssh_client_ips
 }
 
+resource "aws_security_group_rule" "ingress_network_rpc" {
+  security_group_id = aws_security_group.common.id
+  type              = "ingress"
+  from_port         = 8551
+  to_port           = 8551
+  protocol          = "tcp"
+  cidr_blocks       = var.ssh_client_ips
+}
+
 resource "aws_security_group_rule" "ingress_network_tcp" {
   security_group_id        = aws_security_group.common.id
   type                     = "ingress"
